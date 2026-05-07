@@ -1,0 +1,29 @@
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>ShopEasy - Your Online Store</title>
+    <link rel='stylesheet' href='styles.css'>
+  </head>
+  <body>
+    <header>
+      <h1>🛒 ShopEasy</h1>
+      <nav><a href='products.html'>Products</a> | <a href='cart.html'>Cart</a></nav>
+    </header>
+    <main>
+      <h2>Welcome to ShopEasy!</h2>
+      <p>Best deals, delivered fast. Deployed via CI/CD 🚀</p>
+      <div id='products'></div>
+    </main>
+    <script>
+      fetch('/api/products')
+        .then(r => r.json())
+        .then(items => {
+          document.getElementById('products').innerHTML =
+            items.map(p => `<div class='card'>
+              <h3>${p.name}</h3><p>₹${p.price}</p>
+              <button>Add to Cart</button>
+            </div>`).join('');
+        });
+    </script>
+  </body>
+  </html>
